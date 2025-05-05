@@ -1,35 +1,48 @@
-# React + TypeScript + Vite
+# React + TypeScript + Vite + NestJS + Prisma
 
-# ────────────────────────────────────────────────────────────────
+This full-stack project includes:
+
+-  **Frontend**: React + TypeScript + Vite
+-  **Backend**: NestJS + Prisma + PostgreSQL
+-  Docker-powered local development
+
+---
+
+## 🚀 Backend Setup (via Docker)
+
+```bash
 # 1. Build the backend image (run this again only after code changes)
-docker compose build backend        # builds ./backend/Dockerfile
-# ────────────────────────────────────────────────────────────────
+docker compose build backend
+# → builds ./backend/Dockerfile
 
 # 2. Start all containers in the background
-docker compose up -d                # launches postgres + backend
+docker compose up -d
+# → launches PostgreSQL + backend API
 
-# 3. Run Prisma migrations inside the backend container
+# 3. Apply Prisma migrations to the DB
 docker compose exec backend npx prisma migrate deploy
-#   → applies the SQL from /backend/prisma/migrations to the DB
 
-# 4. Seed the database with demo data (users, invoices, …)
+# 4. Seed the database with demo data
 docker compose exec backend npx prisma db seed
-#   → executes seed.ts and inserts initial records
+# → runs prisma/seed.ts and inserts initial data
 
-# 5. (optional) Check that the demo user was created
+# 5. (Optional) View the seeded user
 docker compose exec postgres \
   psql -U testuser -d invoicedb \
   -c 'SELECT email, password FROM "User";'
-#   → prints the email + hashed password you can use to log in
+# → shows login credentials for testing
 
-# 6. Inspect running containers & ports
-docker compose ps                   # status, names, published ports
+# 6. Check container status and mapped ports
+docker compose ps
 
----------------------------------------------------------------------
+Frontend Setup (Vite + React)
+bash
+Copy
+Edit
 cd frontend
 
-# install dependencies once
+# Install dependencies
 npm install
 
-# start Vite dev server on http://localhost:5173
+# Start development server
 npm run dev
