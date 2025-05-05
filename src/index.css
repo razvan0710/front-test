@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+
+@theme {
+  --color-brand: oklch(72% 0.16 29);
+}
+
+@utility btn-primary {
+  padding: 0.5rem 1rem;
+  border-radius: 0.7rem;
+  background: var(--color-brand);
+  color: white;
+}
